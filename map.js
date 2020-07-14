@@ -30,7 +30,7 @@ function style(feature) {
     }
 }
 
-fetch('data-2020-07-10.json').then(res => res.json()).then(data => {
+fetch('data/data-latest.json').then(res => res.json()).then(data => {
     const geojson = L.geoJSON(data, {
         onEachFeature: onEachFeature,
         style: style

@@ -1,13 +1,18 @@
 from bs4 import BeautifulSoup
 import difflib
 import json
+import os
 import requests
 
 
 MAP_URL = 'https://www.nea.gov.sg/api/OneMap/GetMapData/DENGUE_CLUSTER'
 INFO_URL = 'https://www.nea.gov.sg/dengue-zika/dengue/dengue-clusters'
-OUTPUT_JSON_FILE_FORMAT = 'data-%s.json'
-OUTPUT_JSON_LATEST_FILE = 'data-latest.json'
+
+data_dir = os.path.join(os.path.dirname(__file__), 'data/')
+os.makedirs(data_dir, exist_ok=True)
+
+OUTPUT_JSON_FILE_FORMAT = os.path.join(data_dir, 'data-%s.json')
+OUTPUT_JSON_LATEST_FILE = os.path.join(data_dir, 'data-latest.json')
 
 
 def get_map_clusters_date():
