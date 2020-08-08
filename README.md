@@ -8,6 +8,10 @@ To scrape for the data, run `scrape.py`:
 $ python scrape.py
 ```
 
-For a map visualisation of the latest data, serve and visit `index.html`.
+For a map visualisation of the latest data, serve and visit the webpage:
+
+``` sh
+$ php -S localhost:8000
+```
 
 ![Site visualising dengue clusters](site.png)
