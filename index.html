@@ -12,10 +12,10 @@
   </head>
   <body style="height:100%; width:100%; margin:0px">
     <div id="map" style="position:fixed; width:100%; height:100%"></div>
-    <script src="jquery.min.js"></script>
+    <script src="static/jquery.min.js"></script>
     <script src="map.js"></script>
     <div class="slidecontainer">
-      <input type="range" min="1" max="7" value="5" class="slider" id="range">
+      <input type="range" style="visibility:hidden" oninput="sliderUpdate(this.value)" class="slider" id="slider">
     </div>
   </body>
 </html>
