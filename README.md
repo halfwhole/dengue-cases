@@ -14,4 +14,4 @@ For a map visualisation of the latest data, serve and visit the webpage:
 $ php -S localhost:8000
 ```
 
-![Site visualising dengue clusters](site.png)
+![Site visualising dengue clusters](site2.gif)

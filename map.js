@@ -2,8 +2,9 @@ const MAX_OPACITY_NUM = 100;
 const MAX_OPACITY = 0.8;
 
 const map = L.map('map').setView([1.35, 103.82], 12);
-let jsons;
 let geoJsonLayer;
+let jsons;
+let jsonDates;
 
 L.tileLayer('http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
     attribution: '',
@@ -11,7 +12,7 @@ L.tileLayer('http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
     maxZoom: 18
 }).addTo(map);
 
-// Populates the 'jsons' variable
+// Populates the 'jsons' and 'jsonDates' variables
 async function populateJsons(filename) {
     function getFilenames() {
         return new Promise((res, rej) => {
@@ -31,10 +32,10 @@ async function populateJsons(filename) {
     }
 
     const filenames = await getFilenames();
-    const jsonsPromises = filenames
-          .filter(filename => filename != 'data-latest')
-          .map(filename => getJson(filename));
+    const filteredFilenames = filenames.filter(filename => filename != 'data-latest');
+    const jsonsPromises = filteredFilenames.map(filename => getJson(filename));
     jsons = await Promise.all(jsonsPromises);
+    jsonDates = filteredFilenames.map(filename => filename.split('-').slice(1, 4).reverse().join('/'));
 }
 
 
@@ -65,6 +66,7 @@ function displayGeoJson(index) {
         layer.bindPopup(popupContent);
     }
 
+    // Update map with new data in 'geoJsonLayer'
     if (geoJsonLayer) geoJsonLayer.clearLayers();
     const data = jsons.slice(index)[0];
     geoJsonLayer = L.geoJSON(data, {
@@ -72,6 +74,11 @@ function displayGeoJson(index) {
         style: style
     });
     geoJsonLayer.addTo(map);
+
+    // Update text with new date
+    const date = jsonDates[index];
+    text = document.getElementById('text');
+    text.innerHTML = date;
 }
 
 
@@ -81,20 +88,23 @@ function sliderUpdate(value) {
 }
 
 
-// Enables the slider and makes it visible
-function enableSlider() {
+// Enables the slider and text, making them visible
+function enableSliderAndText() {
     slider = document.getElementById('slider');
     slider.style.visibility = 'visible';
     slider.min = 1;
     slider.max = jsons.length;
     slider.value = jsons.length;
+
+    text = document.getElementById('text');
+    text.style.visibility = 'visible';
 }
 
 
 async function main() {
     await populateJsons();
-    enableSlider();
-    displayGeoJson(-1);
+    enableSliderAndText();
+    displayGeoJson(jsons.length - 1);
 }
 
 main();

@@ -1,3 +1,16 @@
+.textcontainer {
+    position: fixed;
+    bottom: 25px;
+    width: 90%;
+    margin-right: 10%;
+    font-family: Century Gothic, sans serif;
+}
+
+.text {
+    margin-right: 5px;
+    text-align: right;
+}
+
 .slidecontainer {
     position: fixed;
     bottom: 0;
@@ -11,9 +24,9 @@
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  width: 100%; /* Full-width */
-  height: 12px; /* Specified height */
-  background: #b3b3b3; /* Grey background */
+  width: 100%;
+  height: 12px;
+  background: #b3b3b3;
   outline: none; /* Remove outline */
   opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
@@ -32,6 +45,7 @@
 /* Mouse-over effects */
 .slider:hover {
   opacity: 1; /* Fully shown on mouse-over */
+  cursor: pointer;
 }
 
 /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
@@ -40,8 +54,8 @@
   appearance: none;
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
-  background: #ff9900; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+  background: #ff9900;
+  cursor: pointer;
   border-radius: 50%;
   border-width: 0;
 }
